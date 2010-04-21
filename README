@@ -1,0 +1,31 @@
+AliasAssociation
+================
+
+A simple Rails plugin that adds alias_association to ActiveRecord classes.
+Aliases all methods added by a reflection (e.g. has_many). The common use case
+for such aliasing is during refactoring (keeping backward compatibility).
+
+
+Example
+=======
+
+class Tree
+
+  # f*ck we can't use the "Apple" name
+  # SJ sad to sue to sh*t out of us !
+  has_many :apples
+
+  alias_association :oranges, :apples
+
+end
+
+# as all reflection methods are aliased, we might :
+tree.orange_ids = ...
+tree.oranges.add( ... )
+
+Please note in case of reflections where the correspondent foreign key is an
+attribute of the aliased class (e.g. belongs_to), the FK attribute is *not*
+aliased (just to keep the magick on a sensual level) ! One might always alias
+such FK attributes explicitly using an additional alias_attribute call.
+
+Copyright (c) 2010 Karol Bucek, released under the MIT license
