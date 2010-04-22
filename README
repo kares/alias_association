@@ -6,22 +6,31 @@ Aliases all methods added by a reflection (e.g. has_many). The common use case
 for such aliasing is during refactoring (keeping backward compatibility).
 
 
+Install
+=======
+
+as a (plain-old) rails plugin :
+
+    ruby script/plugin install git://github.com/kares/alias_association.git
+
+
 Example
 =======
 
-class Tree
+    class Tree
 
-  # f*ck we can't use the "Apple" name
-  # SJ sad to sue to sh*t out of us !
-  has_many :apples
+      # f*ck we can't use the "Apple" name
+      # SJ sad to sue to sh*t out of us !
+      has_many :apples
 
-  alias_association :oranges, :apples
+      alias_association :oranges, :apples
 
-end
+    end
 
-# as all reflection methods are aliased, we might :
-tree.orange_ids = ...
-tree.oranges.add( ... )
+    # as all reflection methods are aliased, we might :
+    tree.orange_ids = ...
+    tree.oranges.add( ... )
+
 
 Please note in case of reflections where the correspondent foreign key is an
 attribute of the aliased class (e.g. belongs_to), the FK attribute is *not*
